@@ -1,0 +1,107 @@
+/* pages/order/order.wxss */
+.topbar{
+  display: flex;
+  padding-bottom: 40px;
+  background-color: #ff5801;
+  height: 50px;
+}
+.toptext{
+  float: right;
+  position: relative;
+  font-size: large;
+}
+.back{
+  position: absolute;
+  top: 40px;
+  /* left: -40px; */
+}
+.back image{
+  margin-left: 20px;
+  margin-right: 15px;
+  width: 50rpx;
+  height: 50rpx;
+}
+.header {
+  font-size: 24px;
+  color: gold;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 50px;
+  left: 170px;
+}
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  margin: 0 10px;
+}
+
+
+.container {
+  padding: 20px;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+
+
+.order-item {
+  padding: 15px;
+  border-bottom: 1px solid rgb(252, 6, 6);
+  position: relative;
+}
+/* 订单 */
+
+/* 编号 */
+.seria{
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  height: 70rpx;
+  line-height: 70rpx;
+  /* background-color: yellow; */
+  border-bottom: 1rpx solid #D4D4D4;
+}
+/* 订单lab */
+.seriac_name{
+  position: absolute;
+  font-size: 28rpx;
+  color: #333;
+  left: 0rpx;
+
+}
+.seriac_name text{
+margin-left: 15rpx;
+}
+/* 订单状态 */
+.seriac_start{
+  position: absolute;
+  right:0rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+
+.coent_list{
+  position: relative;
+  width: 100%;
+  height: 150rpx;
+  line-height: 150rpx;
+  /* border-bottom: 6rpx solid #ddd; */
+  background-color:  #fff;
+}
+.coent_log_base{
+  position: absolute;
+  top: 30%;
+  color: darkgoldenrod;
+  right: 40rpx;
+display: inline-block;
+width: 180rpx;
+height: 56rpx;
+text-align: center;
+border: 1rpx solid  darkgoldenrod;
+font-size: 30rpx;
+line-height: 56rpx;
+}

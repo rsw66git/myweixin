@@ -1,0 +1,42 @@
+<!--pages/over/over.wxml-->
+<view class="topbar">
+<view class="back"><image src="/images/goback.png" bindtap="goback">
+</image>
+<view class="toptext">
+<text style="color: rgb(253, 253, 253);">返回</text>
+</view>
+</view>
+</view>
+
+
+<view class="order-confirmation">
+  <!-- 订单标题 -->
+  <view class="order-title">确认订单</view>
+  <!-- 商品详情列表 -->
+ <!-- 商品详情表 -->
+ <view class="product-list">
+   <text>商品名称：</text>
+    <block wx:for="{{selectDoods}}" wx:for-item="item" wx:key="dish_id">
+      <view class="product-item">
+        <text>{{item.dish_name}}  \t</text>
+        <text>单价:{{item.price}}￥ \t</text>
+        <text>数量:x{{item.stock}}</text>
+      </view>
+    </block>
+  </view>
+  <!-- 总价 -->
+  <view class="total-price">
+    <text>总价：￥{{total}}</text>
+  </view>
+  <!-- 收货地址 -->
+  <!-- 支付方式 -->
+  <view class="payment-method-container">
+  <radio-group class="payment-method" bindchange="onPaymentChange">
+    <label wx:for="{{paymentMethods}}" wx:key="value" class="payment-option">
+      <radio value="{{item.value}}" checked="{{item.checked}}" color="#1aad19">{{item.label}}</radio>
+    </label>
+  </radio-group>
+</view>
+  <!-- 提交订单按钮 -->
+  <button class="submit-order" bindtap="submitOrder">提交订单</button>
+</view>

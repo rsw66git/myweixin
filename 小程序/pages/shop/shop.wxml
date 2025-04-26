@@ -1,0 +1,180 @@
+<!--pages/shop/shop.wxml-->
+<view>
+<view class="topbar">
+<view class="back"><image src="/images/goback.png" bindtap="goback">
+</image>
+<view class="toptext">
+<text style="color: rgb(253, 253, 253);">{{restaurant_name}}</text>
+</view>
+</view>
+<view class="resinfo">
+<image src="{{restaurant_url}}"></image>
+<text>营业时间：{{opening_hours}}</text>
+</view>
+</view>
+<!-- 主体部分-->
+
+
+  <!-- 导航条 -->
+  <view class="navBar">
+    <block wx:for="{{tabs}}" wx:key="item">
+      <view id="{{index}}" class="navItem {{tabIndex == index ? 'active' : '' }}" bindtap="onTabClick">
+        <view class="navItemTitle">{{item}}</view>
+      </view>
+    </block>
+    <!-- 样式1：短条 -->
+    <view class="navbar-slider" style="left: {{sliderLeft}}px; width:32px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px); transition:all linear .5s;"></view>
+    <!-- 样式2：长条 -->
+    <!-- <view class="navbar-slider" style="left: 0; width:{{itemWidth}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px); transition:all linear .5s;"></view> -->
+  </view>
+  <view class="page">
+  <!-- 内容区域 -->
+  <swiper class="content_wrapper" duration='300' bindtransition="swiperTran" bindanimationfinish="animationfinish" current="{{tabIndex}}" bindchange='swiperChange' data-index='{{tabIndex}}'>
+      <swiper-item class="content_page">
+      <!--  -->
+      <view class='big-box'>
+<view class='left-menu'>
+  <block wx:for="{{listData}}" wx:key="category_id">
+    <view class='{{index==idx ? "avtive":"Default-Class"}}' bindtap="switchClassfun" data-index="{{index}}" data-category="{{item.category_id}}"> {{item.category_name}}</view>
+  </block>
+</view>
+<view style='width:73%;'>
+  <scroll-view 
+    class='scrollclass' 
+    scroll-y="true" 
+    scroll-with-animation="true" 
+    enable-back-to-top="true" 
+    scroll-into-view="{{toView}}" 
+    scroll-top="{{scrollTop}}" 
+    bindscroll="bindscrollfunc">
+    <block wx:for="{{dishlist}}" wx:for-item="item" wx:key="dish_id">
+      <view class='scroll-box position' id="position{{index}}" data-index="{{index}}">
+        <!-- <view class='title'>{{item.category_name}}</view> -->
+          <!-- <block wx:for="{{dishlist}}" wx:for-item="items" wx:key="dish_id"> -->
+            <view class='scroll-box-product-box'>
+              <image src='http://127.0.0.1:3000{{item.image_url}}' class='product-img'></image>
+              <view class='product-info-box'>
+                <view class='product-name'>{{item.dish_name}}</view>
+                <!--  -->
+                <view class='product-English-name' bindtap="selectgood" data-index="{{item.dish_id}}">
+                  <image src="/images/add.png"></image>
+                </view>
+                <view class='product-price'>￥{{item.price}}</view>
+              </view>
+            </view>
+          <!-- </block> -->
+      </view>
+    </block>
+  </scroll-view>
+</view>
+</view>
+ 
+<!--  -->
+
+      </swiper-item>
+      <swiper-item class="content_page" >
+<!-- 评论 -->
+
+<!-- <view class="remark_con"> -->
+  <scroll-view 
+    class="remark_list" 
+    scroll-y 
+    bindscrolltolower="loadMore"
+  >
+    <block wx:for="{{remarklist}}" wx:for-item="item" wx:key="remark_id">
+      <view class="user_remark">
+        <view class="user_url">
+          <image src="/images/order_status_user_icon_current@2x.png">
+          </image>
+          <text class="user_na">{{item.username}}</text>
+          <text>{{item.remark_time}}</text>
+        </view>
+      <view class="user_remark_item">{{item.remark}}</view>
+    </view>
+    </block>
+    
+    <!-- 加载更多提示 -->
+    <view class="loading-tip" wx:if="{{isLoading}}">
+      似乎没了...
+    </view>
+
+    <!-- 没有更多数据提示 -->
+    <view class="no-more-tip" wx:if="{{!hasMore && items.length > 0}}">
+      没有更多数据了
+    </view>
+  </scroll-view>
+<!-- </view> -->
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <include src="/pages/shop/templates/remark.wxml"/> -->
+      </swiper-item>
+      <swiper-item class="content_page" style="background:orange;">
+        <h3>敬请期待</h3>
+        <h3>餐厅信息</h3>
+      <!-- <include src="/pages/shop/templates/other.wxml"/> -->
+      </swiper-item>
+  </swiper>
+  <!-- <image src="http://127.0.0.1:3000/1.png"></image>
+  <image src="http://127.0.0.1:3000/2.png"></image> -->
+</view>
+ <!-- 购物车 -->
+  <!-- 底部工具栏 -->
+  <view class="cart-footer" catchtouchmove="preventTouchMove">
+  <view class="summary-bar" bindtap="toggleCartDetails">
+    <view class="car-img">
+      <image wx:if="{{selectedCount}}" src="/images/cart-full@2x.png"></image>
+      <image wx:else src="/images/cart-empty@2x.png"></image>
+    </view>
+    已选 {{selectedCount}}件商品
+  <text class="total-price">￥{{totalPrice}}</text>
+    <button class="checkout-btn" bindtap="goToCheckout" disabled="{{selectedCount <= 0}}">
+      去结算
+    </button>
+  </view>
+</view>
+<!--  -->
+  <!-- 展开后的购物车详情 -->
+  <view class="cart-details" wx:if="{{isCartExpanded}}">
+  <scroll-view 
+  class='scrollclass' 
+    scroll-y="true" 
+    scroll-with-animation="true" 
+    enable-back-to-top="true" 
+    bindscroll="bindscrollfunc">
+    <block wx:for="{{selectGoods}}" wx:for-item="item" wx:for-index="index" wx:key="dish_id">
+      <view class='scroll-box position'>
+            <view class='scroll-box-product-box'>
+              <image src='http://127.0.0.1:3000{{item.image_url}}' class='product-img'></image>
+              <view class='product-info-box'>
+                <view class='product-name'>{{item.dish_name}}</view>
+                <!--  -->
+                <view class='product-English-name' data-index="{{item.dish_id}}">
+                  <image src="/images/jia.png" bindtap="jia"
+                   data-sel_index="{{index}}">
+                  </image>
+                  <view class="bottom_count">{{item.stock}}</view>
+                  <image src="/images/jian.png" bindtap="jian"
+                   data-sel_index="{{index}}"></image>
+                </view>
+                <view class='product-price'>￥{{item.price}}</view>
+              </view>
+            </view>
+          <!-- </block> -->
+      </view>
+    </block>
+  </scroll-view>
+</view>
+
+</view>
+
+
+
