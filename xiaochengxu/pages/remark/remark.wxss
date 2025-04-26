@@ -1,0 +1,71 @@
+.topbar{
+  display: flex;
+  padding-bottom: 40px;
+  background-color: #ff5801;
+  height: 100px;
+}
+.toptext{
+  float: right;
+  position: relative;
+  font-size: large;
+}
+.back{
+  position: absolute;
+  top: 40px;
+  /* left: -40px; */
+}
+.back image{
+  margin-left: 20px;
+  margin-right: 15px;
+  width: 50rpx;
+  height: 50rpx;
+}
+.header {
+  font-size: 24px;
+  color: rgb(253, 253, 250);
+  margin-bottom: 20px;
+  position: absolute;
+  top: 50px;
+  left: 190px;
+}
+/* 整体样式 */
+.container {
+  width: 500px;
+  /* height: 600px; */
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+/* 评论区样式 */
+.comment-section {
+  display: flex;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+}
+/* 文本域样式 */
+.comment-input {
+  flex-grow: 1; /* 确保输入框扩展以填充可用空间 */
+  /* width: calc(100% - 80px); 减去发送按钮和其他间距所占的空间 */
+  width: 300px;
+  min-height: 150px; /* 设置最小高度 */
+  padding: 15px; /* 增加内边距 */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: none; /* 防止用户手动调整大小 */
+}
+
+/* 发送按钮样式 */
+.send-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #1aad19;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-end; /* 将按钮对齐到输入框的底部 */
+}
+
+
